@@ -105,7 +105,7 @@ public class FlashActivity extends BaseCompatActivity {
                     public void onNext(Long value) {
                         String s = String.valueOf(value);
                         if(tvCountDown != null){
-                            tvCountDown.setText(StringUtils.isEmpty(s) ? "" : s));
+                            tvCountDown.setText(StringUtils.isEmpty(s) ? "" : s);
                         }
                     }
 
