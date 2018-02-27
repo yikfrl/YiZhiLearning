@@ -1,4 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'bugly'
+
+bugly {
+    appId = "c73ecc54da"
+    appKey = "27580d71-8095-4e00-8212-85b9ddf985a4"
+}
 
 def buildTime(){
     def date = new Date()
@@ -36,12 +42,14 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:25.3.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:0.5'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    testCompile 'junit:junit:4.12'
     implementation project(':sdk')
+    debugImplementation project(':sdk')
+    releaseImplementation project(':sdk')
 }
