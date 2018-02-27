@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.yz.yikfrl.yizhilearning.MainActivity;
 import com.yz.yikfrl.yizhilearning.R;
 import com.zyw.horrarndoo.sdk.base.activity.BaseCompatActivity;
 import com.zyw.horrarndoo.sdk.helper.RxHelper;
@@ -19,6 +17,7 @@ import com.zyw.horrarndoo.sdk.utils.ToastUtils;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -42,6 +41,7 @@ public class FlashActivity extends BaseCompatActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        //注：魅族pro6s-7.0-flyme6权限没有像类似6.0以上手机一样正常的提示dialog获取运行时权限，而是直接默认给了权限
         requestPermissions();
     }
 
@@ -57,6 +57,7 @@ public class FlashActivity extends BaseCompatActivity {
         finish();
     }
 
+    @OnClick(R.id.ll_skip)
     public void onClick(View v){
         switch (v.getId()){
             case R.id.ll_skip:
