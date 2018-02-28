@@ -28,7 +28,7 @@ public class HomeRootFragment extends BaseCompatFragment{
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         if(findChildFragment(HomeFragment.class) == null){
-            loadRootFragment(R.id.fl_container, HomeFragment.newInstance);
+            loadRootFragment(R.id.fl_container, HomeFragment.newInstance());
         }
     }
 }

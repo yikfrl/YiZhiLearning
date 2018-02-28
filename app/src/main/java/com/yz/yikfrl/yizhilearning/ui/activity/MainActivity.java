@@ -57,7 +57,7 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment.OnO
     @Override
     protected void initView(Bundle savedInstanceState) {
         if(savedInstanceState == null){
-            mFragments[FIRST] = HomeRootFragment.newInstance();
+//            mFragments[FIRST] = HomeRootFragment.newInstance();
         }
     }
 
