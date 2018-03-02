@@ -9,10 +9,10 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yz.yikfrl.yizhilearning.R;
-import com.yz.yikfrl.yizhilearning.adapter.ZhihuAdapter;
-import com.yz.yikfrl.yizhilearning.contract.home.tabs.ZhihuContract;
-import com.yz.yikfrl.yizhilearning.model.bean.zhihu.ZhihuDailyItemBean;
-import com.yz.yikfrl.yizhilearning.presenter.home.tabs.ZhihuPresenter;
+import com.yz.yikfrl.yizhilearning.adapter.WeixinAdapter;
+import com.yz.yikfrl.yizhilearning.contract.home.tabs.WeixinContract;
+import com.yz.yikfrl.yizhilearning.model.bean.weixin.WeixinChoiceItemBean;
+import com.yz.yikfrl.yizhilearning.presenter.home.tabs.WeixinPresenter;
 import com.zyw.horrarndoo.sdk.base.BasePresenter;
 import com.zyw.horrarndoo.sdk.base.fragment.BaseRecycleFragment;
 
@@ -21,35 +21,35 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by yangz on 2018/2/28.
+ * Created by yangz on 2018/3/2.
  */
 
-public class ZhihuFragment extends BaseRecycleFragment<ZhihuContract.ZhihuPresenter,
-        ZhihuContract.IZhihuModel> implements ZhihuContract.IZhihuView, BaseQuickAdapter.
-        RequestLoadMoreListener{
-    @BindView(R.id.rv_zhihu)
-    RecyclerView rvZhihu;
+public class WeixinFragment extends BaseRecycleFragment<WeixinContract.WeixinPresenter,
+        WeixinContract.IWeixinModel> implements WeixinContract.IWeixinView, BaseQuickAdapter.RequestLoadMoreListener{
 
-    private ZhihuAdapter mZhihuAdapter;
+    @BindView(R.id.rv_weixin)
+    RecyclerView rvWeixin;
 
-    public static ZhihuFragment newInstance(){
+    private WeixinAdapter mWeixinAdapter;
+
+    public static WeixinFragment newInstance(){
         Bundle args = new Bundle();
-        ZhihuFragment fragment = new ZhihuFragment();
+        WeixinFragment fragment = new WeixinFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_home_zhihu;
+        return R.layout.fragment_home_weixin;
     }
 
     @Override
     public void initUI(View view, @Nullable Bundle savedInstanceState) {
         //初始化一个空list的adapter，网络错误时使用，第一次加载到数据时重新初始化adapter并绑定recycleview
-        mZhihuAdapter = new ZhihuAdapter(R.layout.item_recycle_home);
-        rvZhihu.setAdapter(mZhihuAdapter);
-        rvZhihu.setLayoutManager(new LinearLayoutManager(mActivity));
+        mWeixinAdapter = new WeixinAdapter(R.layout.item_recycle_home);
+        rvWeixin.setAdapter(mWeixinAdapter);
+        rvWeixin.setLayoutManager(new LinearLayoutManager(mActivity));
     }
 
     @Override
@@ -61,54 +61,54 @@ public class ZhihuFragment extends BaseRecycleFragment<ZhihuContract.ZhihuPresen
     @NonNull
     @Override
     public BasePresenter initPresenter() {
-        return ZhihuPresenter.newInstance();
+        return WeixinPresenter.newInstance();
     }
 
     @Override
-    public void updateContentList(List<ZhihuDailyItemBean> list) {
-        if(mZhihuAdapter.getData().size() == 0){
+    public void updateContentList(List<WeixinChoiceItemBean> list) {
+        if(mWeixinAdapter.getData().size() == 0){
             initRecycleView(list);
         }else{
-            mZhihuAdapter.addData(list);
+            mWeixinAdapter.addData(list);
         }
     }
 
     @Override
     public void itemNotifyChanged(int position) {
-        mZhihuAdapter.notifyItemChanged(position);
+        mWeixinAdapter.notifyItemChanged(position);
     }
 
     @Override
     public void showNetworkError() {
-        mZhihuAdapter.setEmptyView(errorView);
+        mWeixinAdapter.setEmptyView(errorView);
     }
 
     @Override
     public void showLoadMoreError() {
-        mZhihuAdapter.loadMoreFail();
+        mWeixinAdapter.loadMoreFail();
     }
 
     @Override
     public void showNoMoreData() {
-        mZhihuAdapter.loadMoreEnd(false);
+        mWeixinAdapter.loadMoreEnd();
     }
 
     @Override
     public void onLoadMoreRequested() {
-        mZhihuAdapter.loadMoreComplete();
+        mWeixinAdapter.loadMoreComplete();
         mPresenter.loadMoreList();
     }
 
-    private void initRecycleView(List<ZhihuDailyItemBean> list){
-        mZhihuAdapter = new ZhihuAdapter(R.layout.item_recycle_home, list);
-        mZhihuAdapter.setOnLoadMoreListener(this,rvZhihu);
-        mZhihuAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener(){
+    private void initRecycleView(List<WeixinChoiceItemBean> list){
+        mWeixinAdapter = new WeixinAdapter(R.layout.item_recycle_home, list);
+        mWeixinAdapter.setOnLoadMoreListener(this, rvWeixin);
+        mWeixinAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mPresenter.onItemClick(position, (ZhihuDailyItemBean) adapter.getItem(position));
+                mPresenter.onItemClick(position, (WeixinChoiceItemBean)adapter.getItem(position));
             }
         });
-        rvZhihu.setAdapter(mZhihuAdapter);
+        rvWeixin.setAdapter(mWeixinAdapter);
     }
 
     @Override
@@ -118,10 +118,6 @@ public class ZhihuFragment extends BaseRecycleFragment<ZhihuContract.ZhihuPresen
 
     @Override
     protected void showLoading() {
-        mZhihuAdapter.setEmptyView(loadingView);
+        mWeixinAdapter.setEmptyView(loadingView);
     }
-
-
-
-
 }
