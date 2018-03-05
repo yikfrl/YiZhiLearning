@@ -179,6 +179,9 @@ public class HomeFragment extends BaseMVPCompatFragment<HomeMainContract.HomeMai
         }
     }
 
+    /**
+     * fragment代开DrawerLayout监听
+     */
     public interface OnOpenDrawerLayoutListener{
         void onOpen();
     }
