@@ -26,6 +26,7 @@ import com.orhanobut.logger.Logger;
 import com.yz.yikfrl.yizhilearning.R;
 import com.yz.yikfrl.yizhilearning.constant.BundleKeyConstant;
 import com.yz.yikfrl.yizhilearning.constant.detail.BaseWebViewLoadContract;
+import com.yz.yikfrl.yizhilearning.ui.activity.pic.ImageBrowseActivity;
 import com.yz.yikfrl.yizhilearning.ui.widgets.WebViewLongClickedPopWindow;
 import com.zyw.horrarndoo.sdk.base.BasePresenter;
 import com.zyw.horrarndoo.sdk.base.activity.BaseMVPCompatActivity;

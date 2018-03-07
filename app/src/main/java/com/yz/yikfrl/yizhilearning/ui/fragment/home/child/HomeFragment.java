@@ -19,6 +19,7 @@ import com.yz.yikfrl.yizhilearning.constant.BundleKeyConstant;
 import com.yz.yikfrl.yizhilearning.constant.TabFragmentIndex;
 import com.yz.yikfrl.yizhilearning.contract.home.HomeMainContract;
 import com.yz.yikfrl.yizhilearning.presenter.home.HomeMainPresenter;
+import com.yz.yikfrl.yizhilearning.ui.activity.detail.WebViewLoadActivity;
 import com.yz.yikfrl.yizhilearning.ui.fragment.home.child.tabs.WangyiFragment;
 import com.yz.yikfrl.yizhilearning.ui.fragment.home.child.tabs.WeixinFragment;
 import com.yz.yikfrl.yizhilearning.ui.fragment.home.child.tabs.ZhihuFragment;
@@ -180,7 +181,7 @@ public class HomeFragment extends BaseMVPCompatFragment<HomeMainContract.HomeMai
     }
 
     /**
-     * fragment代开DrawerLayout监听
+     * fragment打开DrawerLayout监听
      */
     public interface OnOpenDrawerLayoutListener{
         void onOpen();

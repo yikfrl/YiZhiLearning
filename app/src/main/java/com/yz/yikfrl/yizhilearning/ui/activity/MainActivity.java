@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.yz.yikfrl.yizhilearning.R;
+import com.yz.yikfrl.yizhilearning.ui.fragment.home.HomeRootFragment;
 import com.yz.yikfrl.yizhilearning.ui.fragment.home.child.HomeFragment;
 import com.zyw.horrarndoo.sdk.base.activity.BaseCompatActivity;
 import com.zyw.horrarndoo.sdk.rxbus.RxBus;
@@ -29,10 +30,10 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment.OnO
     BottomNavigationView bottomNavigationView;
 
     public static final int FIRST = 0;
-    public static final int SECOND = 0;
-    public static final int THIRD = 0;
-    public static final int FOURTH = 0;
-    public static final int FIFTH = 0;
+    public static final int SECOND = 1;
+    public static final int THIRD = 2;
+    public static final int FOURTH = 3;
+    public static final int FIFTH = 4;
 
     private SupportFragment[] mFragments = new SupportFragment[5];
 
@@ -57,7 +58,11 @@ public class MainActivity extends BaseCompatActivity implements HomeFragment.OnO
     @Override
     protected void initView(Bundle savedInstanceState) {
         if(savedInstanceState == null){
-//            mFragments[FIRST] = HomeRootFragment.newInstance();
+            mFragments[FIRST] = HomeRootFragment.newInstance();
+            mFragments[SECOND] = GankIoRootFragment.newInstance();
+            mFragments[THIRD] = MovieRootFragment.newInstance();
+            mFragments[FOURTH] = BookRootFragment.newInstance();
+            mFragments[FIFTH] = PersonalRootFragment.newInstance();
         }
     }
 
