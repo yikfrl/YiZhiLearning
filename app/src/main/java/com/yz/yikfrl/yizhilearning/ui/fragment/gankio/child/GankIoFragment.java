@@ -1,5 +1,6 @@
 package com.yz.yikfrl.yizhilearning.ui.fragment.gankio.child;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,13 +12,21 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.orhanobut.logger.Logger;
 import com.yz.yikfrl.yizhilearning.R;
 import com.yz.yikfrl.yizhilearning.constant.RxBusCode;
-import com.yz.yikfrl.yizhilearning.constant.gankio.GankIoMainContract;
+import com.yz.yikfrl.yizhilearning.constant.TabFragmentIndex;
+import com.yz.yikfrl.yizhilearning.contract.gankio.GankIoMainContract;
+import com.yz.yikfrl.yizhilearning.presenter.gankio.GankIoMainPresenter;
+import com.yz.yikfrl.yizhilearning.ui.fragment.gankio.child.tabs.GankIoDayFragment;
+import com.zyw.horrarndoo.sdk.adapter.FragmentAdapter;
 import com.zyw.horrarndoo.sdk.base.BasePresenter;
 import com.zyw.horrarndoo.sdk.base.fragment.BaseMVPCompatFragment;
 import com.zyw.horrarndoo.sdk.rxbus.RxBus;
+import com.zyw.horrarndoo.sdk.rxbus.Subscribe;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -86,21 +95,83 @@ public class GankIoFragment extends BaseMVPCompatFragment<GankIoMainContract.Gan
                 RxBus.get().send(RxBusCode.RX_BUS_CODE_GANKIO_PARENT_FAB_CLICK);
             }
         });
+        vpFragment.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                fabClassify.setVisibility(View.GONE);
+            }
 
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 1){
+                    fabClassify.setVisibility(View.VISIBLE);
+                }else{
+                    fabClassify.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     @NonNull
     @Override
     public BasePresenter initPresenter() {
-        return null;
+        return GankIoMainPresenter.newInstance();
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        mPresenter.getTabList();
     }
 
     @Override
     public void showTabList(String[] tabs) {
-
+        Logger.w(Arrays.toString(tabs));
+        for(int i = 0; i < tabs.length; i++){
+            tlTabs.addTab(tlTabs.newTab().setText(tabs[i]));
+            switch (i){
+                case TabFragmentIndex.TAB_GANK_DAY_INDEX:
+                    fragments.add(GankIoDayFragment.newInstance());
+                    break;
+                case TabFragmentIndex.TAB_GANK_CUSTOM_INDEX:
+                    fragments.add(GankIoCustomFragment.newInstance());
+                    break;
+                case TabFragmentIndex.TAB_GANK_WELFARE_INDEX:
+                    fragments.add(GankIoWelfareFragment.newInstance());
+                    break;
+                default:
+                    fragments.add(GankIoDayFragment.newInstance());
+                    break;
+            }
+        }
+        vpFragment.setAdapter(new FragmentAdapter(getChildFragmentManager(), fragments));
+        //要设置到viewpager.setAdapter后才起作用
+        vpFragment.setCurrentItem(TabFragmentIndex.TAB_GANK_DAY_INDEX);
+        tlTabs.setupWithViewPager(vpFragment);
+        tlTabs.setVerticalScrollbarPosition(TabFragmentIndex.TAB_GANK_DAY_INDEX);
+        //tlTabs.setupWithViewPager方法内部会remove所有的tabs，这里重新设置一遍tabs的text，否则tabs的text不显示
+        for(int i = 0; i<tabs.length; i++){
+            tlTabs.getTabAt(i).setText(tabs[i]);
+        }
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        fragments = new ArrayList<>();
+    }
 
-
-
+    /**
+     * 切换tabs
+     */
+    @Subscribe(code = RxBusCode.RX_BUS_CODE_GANKIO_SELECT_TO_CHILD)
+    public void rxBusEvent(Integer index){
+        Logger.e("index = " + index);
+        tlTabs.setVerticalScrollbarPosition(index);
+        vpFragment.setCurrentItem(index);
+    }
 }

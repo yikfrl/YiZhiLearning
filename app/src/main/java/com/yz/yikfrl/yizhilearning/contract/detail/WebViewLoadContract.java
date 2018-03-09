@@ -1,4 +1,4 @@
-package com.yz.yikfrl.yizhilearning.constant.detail;
+package com.yz.yikfrl.yizhilearning.contract.detail;
 
 import com.yz.yikfrl.yizhilearning.presenter.detail.BaseWebViewLoadPresenter;
 

@@ -7,7 +7,7 @@ import android.webkit.WebView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.yz.yikfrl.yizhilearning.constant.detail.BaseWebViewLoadContract;
+import com.yz.yikfrl.yizhilearning.contract.detail.BaseWebViewLoadContract;
 import com.zyw.horrarndoo.sdk.utils.FileUtils;
 
 /**

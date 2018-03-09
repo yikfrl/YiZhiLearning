@@ -2,7 +2,7 @@ package com.yz.yikfrl.yizhilearning.presenter.detail;
 
 import android.support.annotation.NonNull;
 
-import com.yz.yikfrl.yizhilearning.constant.detail.WebViewLoadContract;
+import com.yz.yikfrl.yizhilearning.contract.detail.WebViewLoadContract;
 import com.yz.yikfrl.yizhilearning.model.detail.WebViewLoadModel;
 
 /**

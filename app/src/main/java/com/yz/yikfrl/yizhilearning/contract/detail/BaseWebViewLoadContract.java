@@ -1,4 +1,4 @@
-package com.yz.yikfrl.yizhilearning.constant.detail;
+package com.yz.yikfrl.yizhilearning.contract.detail;
 
 import android.support.v4.app.FragmentActivity;
 import android.webkit.WebView;

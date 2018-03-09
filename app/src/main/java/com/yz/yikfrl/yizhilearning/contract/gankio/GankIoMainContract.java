@@ -1,4 +1,4 @@
-package com.yz.yikfrl.yizhilearning.constant.gankio;
+package com.yz.yikfrl.yizhilearning.contract.gankio;
 
 import com.zyw.horrarndoo.sdk.base.BasePresenter;
 import com.zyw.horrarndoo.sdk.base.IBaseFragment;
